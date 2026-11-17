@@ -42,4 +42,4 @@ sudo -u ubuntu bash -c "
 
 # 6. Schedule automated hourly runs via cron
 CRON_JOB="0 * * * * cd /home/ubuntu/event-pipeline && /home/ubuntu/event-pipeline/venv/bin/python generator.py && /home/ubuntu/event-pipeline/venv/bin/python pipeline.py >> /home/ubuntu/event-pipeline/cron.log 2>&1"
-(crontab -u ubuntu -l 2>/dev/null; echo "$CRON_JOB") | crontab -u ubuntu -
+{ crontab -u ubuntu -l 2>/dev/null || true; echo "$CRON_JOB"; } | crontab -u ubuntu -
